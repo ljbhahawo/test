@@ -2,6 +2,7 @@ package com.tedu.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
@@ -41,20 +42,31 @@ public class GameThread extends Thread{
 			}
 		}
 	}
+
+	private int round = 1;	// 游戏轮次 作业需要两轮
 	/**
 	 * 游戏的加载
 	 */
 	private void gameLoad() {
+		Random ran = new Random();
 		GameLoad.loadImg(); //加载图片
-		GameLoad.MapLoad(1);//可以变为 变量，每一关重新加载  加载地图
-//		加载主角
-		GameLoad.loadPlay();//也可以带参数，单机还是2人
+		GameLoad.MapLoad(ran.nextInt(10)+1);//可以变为 变量，每一关重新加载  加载地图
+
 //		加载敌人NPC等
-		GameLoad.loadEnemy();
-		GameLoad.loadEnemy();
-		GameLoad.loadEnemy();
-		GameLoad.loadEnemy();
-		GameLoad.loadEnemy();
+		if (round == 1){
+			for (int i =0;i<5;i++){
+				GameLoad.loadEnemy();
+			}
+			//		加载主角
+			GameLoad.loadPlay();//也可以带参数，单机还是2人
+		}
+		if (round==2){
+			for (int i =0;i<5;i++){
+				GameLoad.loadEnemy();
+			}
+		}
+
+
 //		全部加载完成，游戏启动
 	}
 	/**
@@ -78,6 +90,11 @@ public class GameThread extends Thread{
 			ElementPK(files,maps);
 			
 			gameTime++;//唯一的时间控制
+
+			if(enemys.isEmpty()){
+				break;
+			}
+
 			try {
 				sleep(10);//默认理解为 1秒刷新100次 
 			} catch (InterruptedException e) {
@@ -86,6 +103,14 @@ public class GameThread extends Thread{
 			}
 		}
 	}
+
+	public static int score=0;	// 游戏得分 击败敌人可以增加得分 一个敌人加10
+
+	private void addScore(){
+		score+=10;
+	}
+
+
 	public void ElementPK(List<ElementObj> listA,List<ElementObj>listB) {
 //		请大家在这里使用循环，做一对一判定，如果为真，就设置2个对象的死亡状态
 		for(int i=0;i<listA.size();i++) {
@@ -96,19 +121,20 @@ public class GameThread extends Thread{
 //					问题： 如果是boos，那么也一枪一个吗？？？？
 //					将 setLive(false) 变为一个受攻击方法，还可以传入另外一个对象的攻击力
 //					当收攻击方法里执行时，如果血量减为0 再进行设置生存为 false
-//					扩展 留给大家
-					System.out.println(listB);
+					if (enemy instanceof Enemy){
+						addScore();
+						System.out.println(score);
+					}
+//					System.out.println(listB);
 					enemy.setLive(false);
 					file.setLive(false);
+
 					break;
 				}
 			}
 		}
 	}
-	
-	
-	
-	
+
 //	游戏元素自动化方法
 	public void moveAndUpdate(Map<GameElement, List<ElementObj>> all,long gameTime) {
 //		GameElement.values();//隐藏方法  返回值是一个数组,数组的顺序就是定义枚举的顺序
@@ -133,7 +159,9 @@ public class GameThread extends Thread{
 	
 	/**游戏切换关卡*/
 	private void gameOver() {
-		
+		if(round++ == 2){
+			System.exit(0);
+		}
 	}
 	
 }

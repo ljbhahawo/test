@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import com.tedu.controller.GameThread;
 import com.tedu.element.ElementObj;
 import com.tedu.element.Play;
 import com.tedu.manager.ElementManager;
@@ -58,8 +59,11 @@ public class GameMainJPanel extends JPanel implements Runnable{
 				obj.showElement(g);//调用每个类的自己的show方法完成自己的显示
 			}
 		}
+		g.setColor(Color.RED); // 设置文本颜色为白色
+		g.setFont(new Font("Arial", Font.BOLD, 20)); // 设置文本字体和大小
+		g.drawString("Score: " + GameThread.score, 10, 30); // 绘制得分文本，位置为(10, 30)
 
-		
+
 	}
 	@Override
 	public void run() {  //接口实现
