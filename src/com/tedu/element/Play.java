@@ -170,30 +170,13 @@ public class Play extends ElementObj /* implements Comparable<Play>*/{
 		case "left": y+=20;break;
 		case "right": x+=50;y+=20;break;
 		case "down": y+=50;x+=20; break;
-		}//个人认为： 玩游戏有助于 理解面向对象思想;不能专门玩，需要思考，父类应该怎么抽象，子类应该怎么实现
-//		学习技术不犯法，但是不要用技术做犯法的事.
+		}
 		return "x:"+x+",y:"+y+",f:"+this.fx;
 	}
 	
 	
 	
 }
-
-//try {
-//Class<?> forName = Class.forName("com.tedu.....");
-//ElementObj element = forName.newInstance().createElement("");
-//} catch (InstantiationException e) {
-//// TODO Auto-generated catch block
-//e.printStackTrace();
-//} catch (IllegalAccessException e) {
-//// TODO Auto-generated catch block
-//e.printStackTrace();
-//} //以后的框架学习中会碰到
-//// 会帮助你返回对象的实体，并初始化数据
-//catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//}
 
 
 

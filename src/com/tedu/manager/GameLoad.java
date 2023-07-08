@@ -70,11 +70,11 @@ public class GameLoad {
 			e.printStackTrace();
 		}
 
-		// 添加敌人对象
-		for (int i = 0; i < 5; i++) {
-			ElementObj enemy = new Enemy().createElement("");
-			em.addElement(enemy, GameElement.ENEMY);
-		}
+//		// 添加敌人对象
+//		for (int i = 0; i < 5; i++) {
+//			ElementObj enemy = new Enemy().createElement("");
+//			em.addElement(enemy, GameElement.ENEMY);
+//		}
 	}
 	/**
 	 *@说明 加载图片代码
@@ -87,7 +87,6 @@ public class GameLoad {
 //		imgMap用于存放数据
 		pro.clear();
 		try {
-//			System.out.println(texts);
 			pro.load(texts);
 			Set<Object> set = pro.keySet();//是一个set集合
 			for(Object o:set) {
@@ -112,7 +111,21 @@ public class GameLoad {
 //		解耦,降低代码和代码之间的耦合度 可以直接通过 接口或者是抽象父类就可以获取到实体对象
 		em.addElement(play, GameElement.PLAY);
 	}
-	
+
+	/**
+	 * 加载敌人
+	 */
+	public static void loadEnemy(){
+		loadObj();
+		String enemyStr="500,500,right";
+		ElementObj obj=getObj("enemy");
+		ElementObj enemy = obj.createElement(enemyStr);
+
+		em.addElement(enemy,GameElement.ENEMY);
+
+	}
+
+
 	public static ElementObj getObj(String str) {
 		try {
 			Class<?> class1 = objMap.get(str);

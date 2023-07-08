@@ -46,11 +46,15 @@ public class GameThread extends Thread{
 	 */
 	private void gameLoad() {
 		GameLoad.loadImg(); //加载图片
-		GameLoad.MapLoad(5);//可以变为 变量，每一关重新加载  加载地图
+		GameLoad.MapLoad(1);//可以变为 变量，每一关重新加载  加载地图
 //		加载主角
 		GameLoad.loadPlay();//也可以带参数，单机还是2人
 //		加载敌人NPC等
-		
+		GameLoad.loadEnemy();
+		GameLoad.loadEnemy();
+		GameLoad.loadEnemy();
+		GameLoad.loadEnemy();
+		GameLoad.loadEnemy();
 //		全部加载完成，游戏启动
 	}
 	/**
