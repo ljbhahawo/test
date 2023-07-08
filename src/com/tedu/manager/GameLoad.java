@@ -13,6 +13,7 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 
 import com.tedu.element.ElementObj;
+import com.tedu.element.Enemy;
 import com.tedu.element.MapObj;
 import com.tedu.element.Play;
 
@@ -37,7 +38,7 @@ public class GameLoad {
 	 * @param mapId  文件编号 文件id
 	 */
 	public static void MapLoad(int mapId) {
-//		得到啦我们的文件路径
+//		得到我们的文件路径
 		String mapName="com/tedu/text/"+mapId+".map";
 //		使用io流来获取文件对象   得到类加载器
 		ClassLoader classLoader = GameLoad.class.getClassLoader();
@@ -51,7 +52,6 @@ public class GameLoad {
 			pro.clear();
 			pro.load(maps);
 //			可以直接动态的获取所有的key，有key就可以获取 value
-//			java学习中最好的老师 是 java的API文档。
 			Enumeration<?> names = pro.propertyNames();
 			while(names.hasMoreElements()) {//获取是无序的
 //				这样的迭代都有一个问题：一次迭代一个元素。
@@ -68,6 +68,12 @@ public class GameLoad {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+
+		// 添加敌人对象
+		for (int i = 0; i < 5; i++) {
+			ElementObj enemy = new Enemy().createElement("");
+			em.addElement(enemy, GameElement.ENEMY);
 		}
 	}
 	/**
