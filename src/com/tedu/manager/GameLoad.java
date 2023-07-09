@@ -115,9 +115,9 @@ public class GameLoad {
 	/**
 	 * 加载敌人
 	 */
-	public static void loadEnemy(){
+	public static void loadEnemy(int i){
 		loadObj();
-		String enemyStr="500,500,right";
+		String enemyStr="500,500,right,"+i;
 		ElementObj obj=getObj("enemy");
 		ElementObj enemy = obj.createElement(enemyStr);
 

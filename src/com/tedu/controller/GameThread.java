@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 import com.tedu.element.ElementObj;
 import com.tedu.element.Enemy;
@@ -55,14 +55,15 @@ public class GameThread extends Thread{
 //		加载敌人NPC等
 		if (round == 1){
 			for (int i =0;i<5;i++){
-				GameLoad.loadEnemy();
+				GameLoad.loadEnemy(1);
 			}
 			//		加载主角
 			GameLoad.loadPlay();//也可以带参数，单机还是2人
 		}
 		if (round==2){
 			for (int i =0;i<5;i++){
-				GameLoad.loadEnemy();
+				GameLoad.loadEnemy(1);
+				GameLoad.loadEnemy(2);
 			}
 		}
 
@@ -160,6 +161,7 @@ public class GameThread extends Thread{
 	/**游戏切换关卡*/
 	private void gameOver() {
 		if(round++ == 2){
+			JOptionPane.showMessageDialog(null, "游戏结束！得分：" + score, "游戏结束", JOptionPane.INFORMATION_MESSAGE);
 			System.exit(0);
 		}
 	}
